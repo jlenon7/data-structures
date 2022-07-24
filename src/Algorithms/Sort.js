@@ -14,7 +14,7 @@ export class Sort {
    * subarray to find the next min value and replacing with
    * the first value in the list.
    * 
-   * Time complexity: O(n2)
+   * Time complexity: O(n^2)
    * 
    * @return {List}
    */
