@@ -9,7 +9,7 @@ export class SortTest extends Test {
    * @param {import('@athenna/test').HttpTestContext} ctx
    */
   async shouldBeAbleToExecuteSelectionSortMethod({ assert }) {
-    const listSorted = this.#sort.selection().get()
+    const listSorted = this.#sort.bySelection().get()
 
     assert.equal(listSorted[0], 1)
   }
@@ -18,7 +18,16 @@ export class SortTest extends Test {
    * @param {import('@athenna/test').HttpTestContext} ctx
    */
   async shouldBeAbleToExecuteBubbleSortMethod({ assert }) {
-    const listSorted = this.#sort.bubble().get()
+    const listSorted = this.#sort.byBubble().get()
+
+    assert.equal(listSorted[0], 1)
+  }
+
+  /**
+   * @param {import('@athenna/test').HttpTestContext} ctx
+   */
+  async shouldBeAbleToExecuteInsertionSortMethod({ assert }) {
+    const listSorted = this.#sort.byInsertion().get()
 
     assert.equal(listSorted[0], 1)
   }

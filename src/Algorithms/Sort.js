@@ -18,7 +18,7 @@ export class Sort {
    * 
    * @return {List}
    */
-	selection() {
+	bySelection() {
     const list = this.#list
     const length = list.length
         
@@ -45,14 +45,14 @@ export class Sort {
   }
 
   /**
-   * Sort the list verifing if the next value of the array
+   * Sort the list verifying if the next value of the array
    * is smaller than the current one, if it is, we swap both.
    * 
    * Time complexity: O(n^2)
    * 
    * @return {List}
    */
-  bubble() {
+  byBubble() {
     const list = this.#list
     const length = list.length
 
@@ -66,6 +66,34 @@ export class Sort {
            list[index + 1] = tmp
         }
       }
+    }
+
+    return this
+  }
+
+  /**
+   * Sort the list verifying if the next value of the array is smaller
+   * than the last one.
+   * 
+   * Time complexity: O(n^2)
+   * 
+   * @return {List}
+   */
+  byInsertion() {
+    const list = this.#list
+    const length = list.length
+
+    for (let index = 1; index < length; index++) {
+      const currentKey = list[index]
+      let lastKeyIndex = index - 1
+
+      while (lastKeyIndex >= 0 && list[lastKeyIndex] > currentKey) {
+        list[lastKeyIndex + 1] = list[lastKeyIndex]
+
+        lastKeyIndex--
+      }
+
+      list[lastKeyIndex + 1] = currentKey
     }
 
     return this
