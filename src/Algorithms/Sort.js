@@ -3,6 +3,10 @@ export class Sort {
   	return new Sort(values)
   }
 
+  static isSorted(list) {
+    return list.every((v, i, a) => !i || a[i - 1] <= v);
+  }
+
   #list
 
   constructor(list) {
@@ -97,6 +101,59 @@ export class Sort {
     }
 
     return this
+  }
+
+  /**
+   * Sort the list using the divide and conquer strategy,
+   * dividing the list until it got only one value and then
+   * join everything sorting one by one.
+   * 
+   * Time complexity: O(nlogn)
+   * 
+   * @param {number} initial
+   * @param {number} final
+   * @return {List}
+   */
+   byMerge(initial = 0, final = this.#list.length) {
+     if (final - initial > 1) {
+       const middle = Math.floor((final + initial) / 2)
+
+       this.byMerge(initial, middle)
+       this.byMerge(middle, final)
+
+       // Merge process
+       const leftList = this.#list.slice(initial, middle)
+       const rightList = this.#list.slice(middle, final)
+
+       let leftIndex = 0
+       let rightIndex = 0
+
+       const isLeftLessThanRight = (leftI, rightI) => {
+         if (!rightList[rightI]) {
+           return true
+         }
+
+         if (!leftList[leftI]) {
+           return false
+         }
+
+         return leftList[leftI] < rightList[rightI]
+       }
+
+       for (let index = initial; index < final; index++) {
+         if (isLeftLessThanRight(leftIndex, rightIndex)) {
+           this.#list[index] = leftList[leftIndex]
+           
+           leftIndex++
+         } else {
+           this.#list[index] = rightList[rightIndex]
+
+           rightIndex++
+         }
+       }
+     }
+
+     return this
   }
 
   get() {
